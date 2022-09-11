@@ -1,0 +1,19 @@
+---
+- name: test docker container
+  hosts: web
+  tasks:
+    - name: run shell cmd
+      shell:
+        cmd: whoami
+      register: hello
+    - debug: msg="{{ hello.stdout }}"
+    - debug: msg="{{ hello.stderr }}"
+
+    - name: install nginx
+      apt: name=nginx state=present update_cache=yes
+
+    - name: start nginx ; used command instead of service due to systemd not running on docker.
+      command: service nginx start 
+
+    - name: create content
+      copy: content="Congrats on installing ansible" dest=/var/www/html/index.html
