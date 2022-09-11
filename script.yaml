@@ -1,0 +1,6 @@
+---
+- name: run a script
+  hosts: web
+  tasks:
+    - name: install script
+      script: ./install_nginx.sh
