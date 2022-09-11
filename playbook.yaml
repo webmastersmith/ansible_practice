@@ -12,8 +12,9 @@
     - name: install nginx
       apt: name=nginx state=present update_cache=yes
 
-    - name: start nginx ; used command instead of service due to systemd not running on docker.
-      command: service nginx start 
+    # used command instead of service due to systemd not running on docker.
+    - name: start nginx
+      command: service nginx restart 
 
     - name: create content
       copy: content="Congrats on installing ansible" dest=/var/www/html/index.html
